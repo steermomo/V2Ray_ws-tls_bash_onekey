@@ -485,11 +485,11 @@ acme() {
         exit 1
     fi
 
-    if "$HOME"/.acme.sh/acme.sh --issue -d "${domain}" --standalone -k ec-256 --force; then
+    if "$HOME"/.acme.sh/acme.sh --listen-v6 --issue -d "${domain}" --standalone -k ec-256 --force; then
         echo -e "${OK} ${GreenBG} SSL 证书生成成功 ${Font}"
         sleep 2
         mkdir /data
-        if "$HOME"/.acme.sh/acme.sh --installcert -d "${domain}" --fullchainpath /data/v2ray.crt --keypath /data/v2ray.key --ecc --force; then
+        if "$HOME"/.acme.sh/acme.sh --listen-v6  --installcert -d "${domain}" --fullchainpath /data/v2ray.crt --keypath /data/v2ray.key --ecc --force; then
             echo -e "${OK} ${GreenBG} 证书配置成功 ${Font}"
             sleep 2
         fi
