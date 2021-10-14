@@ -440,7 +440,8 @@ domain_check() {
     echo -e "域名dns解析IP：${domain_ip}"
     echo -e "本机IP: ${local_ip}"
     sleep 2
-    if [[ $(echo "${local_ip}" | tr '.' '+' | bc) -eq $(echo "${domain_ip}" | tr '.' '+' | bc) ]]; then
+    # if [[ $(echo "${local_ip}" | tr '.' '+' | bc) -eq $(echo "${domain_ip}" | tr '.' '+' | bc) ]]; then
+    if [[ "$local_ip" = "$domain_ip" ]]; then
         echo -e "${OK} ${GreenBG} 域名dns解析IP 与 本机IP 匹配 ${Font}"
         sleep 2
     else
@@ -537,7 +538,7 @@ nginx_conf_add() {
     cat >${nginx_conf_dir}/v2ray.conf <<EOF
     server {
         listen 443 ssl http2;
-        listen [::]:443 http2;
+        listen [::]:443 ssl http2;
         ssl_certificate       /data/v2ray.crt;
         ssl_certificate_key   /data/v2ray.key;
         ssl_protocols         TLSv1.3;
